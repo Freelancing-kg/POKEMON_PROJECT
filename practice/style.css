@@ -151,17 +151,19 @@ body{
 }
 
 /* EVOLUTION */
-
-.evolution-chain{
+#evolution-chain{
     display:flex;
     align-items:center;
     justify-content:center;
     gap:25px;
-    flex-wrap:wrap;
+    flex-direction: row;
+    margin:50px;
+    
 }
 
 .evolution{
     text-align:center;
+    
 }
 
 .evolution img{
@@ -224,6 +226,10 @@ body{
 
 .move-card:hover{
     transform:translateY(-3px);
+}
+.arrow{
+    font-size:30px;
+    align-self:center;
 }
 
 /* RESPONSIVE */

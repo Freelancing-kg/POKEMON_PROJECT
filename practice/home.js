@@ -66,6 +66,13 @@ async function speciesFetch(url){
         console.log(error);
     }   
 }
+function getEvolutions(chain, evolutionChain){
+    evolutionChain.push(chain.species.name);
+
+    chain.evolves_to.forEach(nextEvolution => {
+        getEvolutions(nextEvolution, evolutionChain);
+    });
+}
 
 async function fetchEvolutionChain(url) {
     try {
@@ -76,15 +83,7 @@ async function fetchEvolutionChain(url) {
 
         let currentChain = data.chain;
 
-        while(currentChain){
-
-            evolutionChain.push(
-                currentChain.species.name
-            );
-
-            currentChain =
-                currentChain.evolves_to[0] || null;
-        }
+        getEvolutions(data.chain, evolutionChain);
 
         console.log(evolutionChain);
 
@@ -110,6 +109,12 @@ async function pokemonEvolutinoImage(names){
             <img src=${data.sprites.other['official-artwork'].front_default} alt=${data.name} image>
             <p>${data.name}</p>`
             evolutionChainContainer.appendChild(divElement);
+            if(name !== names[names.length-1]){
+                const arrow = document.createElement('span');
+                arrow.classList.add('arrow');
+                arrow.innerHTML = '➜';
+                evolutionChainContainer.appendChild(arrow);
+            }
 
         }
     }
