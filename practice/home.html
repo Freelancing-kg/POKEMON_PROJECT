@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id = "searchContainer">
+            <input type="text" id="searchInput" placeholder="Pokémon...">
+            <button id="searchButton" onclick="fetchPokemon()">🔎</button>
+        </div>
+
+        <!-- TOP SECTION -->
+        <section class="top-section">
+
+            <!-- LEFT SIDE -->
+            <div class="left-panel">
+
+                <div class="pokemon-image-card">
+                    <img
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
+                        alt="Pokemon"
+                    >
+                </div>
+
+                <div class="name-card">
+                    <h1>Pikachu</h1>
+                    <p>#025</p>
+                </div>
+
+                <div class="details-card">
+
+                    <h2>Details</h2>
+
+                    <div class="detail-item">
+                        <span>Height</span>
+                        <p>0.4m</p>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Weight</span>
+                        <p>6.0kg</p>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Type</span>
+                        <p>Electric</p>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Ability</span>
+                        <p>Static</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="right-panel">
+
+                <div class="stats-card">
+
+                    <h2>Base Stats</h2>
+
+                    <div class="stat">
+                        <span>HP</span>
+                        <div class="bar">
+                            <div class="fill" style="width:35%"><p>35</p></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <span>Attack</span>
+                        <div class="bar">
+                            <div class="fill" style="width:55%"><p>55</p></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <span>Defense</span>
+                        <div class="bar">
+                            <div class="fill" style="width:40%"><p>40</p></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <span>Special Attack</span>
+                        <div class="bar">
+                            <div class="fill" style="width:40%"><p>40</p></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <span>Special Defense</span>
+                        <div class="bar">
+                            <div class="fill" style="width:40%"><p>40</p></div>
+                        </div>
+                    </div>
+
+                    <div class="stat">
+                        <span>Speed</span>
+                        <div class="bar">
+                            <div class="fill" style="width:80%"><p>80</p></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="evolution-card">
+
+                    <h2>Evolution Chain</h2>
+
+                    <div id="evolution-chain">
+
+                        <!-- <div class="evolution">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/172.png">
+                            <p>Pichu</p>
+                        </div> 
+
+                        <span>→</span>
+
+                        <div class="evolution">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png">
+                            <p>Pikachu</p>
+                        </div>
+
+                        <span>→</span>
+
+                        <div class="evolution">
+                            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png">
+                            <p>Raichu</p>
+                        </div> -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- MOVES SECTION -->
+
+        <section class="moves-section">
+
+            <button class="moves-btn">
+                ▼ Show Moves
+            </button>
+
+            <div class="moves-container">
+
+                <!-- <div class="move-card">Thunderbolt</div>
+                <div class="move-card">Quick Attack</div>
+                <div class="move-card">Thunder</div>
+                <div class="move-card">Volt Tackle</div>
+                <div class="move-card">Electro Ball</div>
+                <div class="move-card">Iron Tail</div> -->
+
+            </div>
+
+        </section>
+
+    </div>
+<script src="home.js"></script>
+</body>
+</html>

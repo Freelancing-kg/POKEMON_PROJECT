@@ -1,0 +1,119 @@
+let currentName='';
+
+
+async function fetchPokemon(name) {
+    try {
+        const pokemonInput =name ||document.getElementById("searchInput").value.toLowerCase();
+        currentName = pokemonInput;
+        const url = `https://pokeapi.co/api/v2/pokemon/${pokemonInput}`;
+        const responce = await fetch(url);
+        const data = await responce.json();
+        displayPokemon(data);
+        
+    } 
+    catch (error) {
+        console.error('Error fetching Pokémon:', error);
+    }   
+}
+
+function displayPokemon(data){
+    // Update Pokémon Image
+    const pokemonImage = document.querySelector('.pokemon-image-card img');
+    pokemonImage.src = data.sprites.other['official-artwork'].front_default;
+    // Update Pokémon Name
+    const pokemonName = document.querySelector('.name-card h1');
+    pokemonName.textContent = data.name.toUpperCase();
+    // Update Pokémon ID
+    const pokemonId = document.querySelector('.name-card p');
+    pokemonId.textContent = `#${data.id.toString().padStart(3, '0')}`;
+    //Update Pokémon Details
+    const pokemonDetails = document.querySelector('.details-card p');
+    pokemonDetails.textContent = `${data.height / 10} m`;
+    const pokemonWeight = document.querySelector('.details-card .detail-item:nth-child(3    ) p');
+    pokemonWeight.textContent = `${data.weight / 10} kg`;
+    const pokemonType = document.querySelector('.details-card .detail-item:nth-child(4) p');
+    pokemonType.textContent = data.types.map(typeInfo => typeInfo.type.name).join(', ');
+    const pokemonAbility = document.querySelector('.details-card .detail-item:nth-child(5) p');
+    pokemonAbility.textContent = data.abilities.map(abilityInfo => abilityInfo.ability.name).join(', ');
+    // Update stats
+    const statsContainer = document.querySelectorAll('.stats-card .stat .bar .fill');
+    statsContainer.forEach((bar, index) => {
+        const statValue = data.stats[index].base_stat;
+        bar.style.width = `${(statValue / 255) * 100}%`;
+        bar.querySelector('p').textContent = statValue;
+    });
+    //Update Moves
+    const movesContainer = document.querySelector('.moves-container ');
+    movesContainer.innerHTML = '';
+    data.moves.forEach(moveInfo => {
+        const moveElement = document.createElement('div');
+        moveElement.classList.add('move-card');
+        moveElement.textContent = moveInfo.move.name;
+        movesContainer.appendChild(moveElement);
+    });
+    speciesFetch(data.species.url);
+
+    
+}
+
+async function speciesFetch(url){
+    try{
+        const responce = await fetch(url);
+        const data = await responce.json();
+        await fetchEvolutionChain(data.evolution_chain.url);
+    }
+    catch(error){
+        console.log(error);
+    }   
+}
+
+async function fetchEvolutionChain(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        let evolutionChain = [];
+
+        let currentChain = data.chain;
+
+        while(currentChain){
+
+            evolutionChain.push(
+                currentChain.species.name
+            );
+
+            currentChain =
+                currentChain.evolves_to[0] || null;
+        }
+
+        console.log(evolutionChain);
+
+        pokemonEvolutinoImage(evolutionChain);
+    } catch (error) {
+        console.error('Error fetching evolution chain:', error);
+    }
+}
+
+async function pokemonEvolutinoImage(names){
+    try{
+        const evolutionChainContainer = document.getElementById("evolution-chain");
+        evolutionChainContainer.innerHTML='';
+        for(let name of names){
+            const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
+            const responce = await fetch (url); 
+            const data = await responce.json(); 
+            
+            
+            const divElement = document.createElement('div');
+            divElement.classList.add('evolution');
+            divElement.innerHTML= `
+            <img src=${data.sprites.other['official-artwork'].front_default} alt=${data.name} image>
+            <p>${data.name}</p>`
+            evolutionChainContainer.appendChild(divElement);
+
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
+}
