@@ -66,11 +66,30 @@ async function speciesFetch(url){
         console.log(error);
     }   
 }
-function getEvolutions(chain, evolutionChain){
-    evolutionChain.push(chain.species.name);
+
+function getEvolutions(chain, evolutionLevels,level=0){
+    // evolutionChain.push(chain.species.name);
+
+    // chain.evolves_to.forEach(nextEvolution => {
+    //     getEvolutions(nextEvolution, evolutionChain);
+    
+    // });
+    console.log("hello");
+    if(!evolutionLevels[level]){
+        evolutionLevels[level] = [];
+        
+    }
+
+    evolutionLevels[level].push(
+        chain.species.name
+    );
 
     chain.evolves_to.forEach(nextEvolution => {
-        getEvolutions(nextEvolution, evolutionChain);
+        getEvolutions(
+            nextEvolution,
+            evolutionLevels,
+            level + 1
+        );
     });
 }
 
@@ -79,43 +98,65 @@ async function fetchEvolutionChain(url) {
         const response = await fetch(url);
         const data = await response.json();
 
-        let evolutionChain = [];
+        let evolutionLevel = [];
 
         let currentChain = data.chain;
 
-        getEvolutions(data.chain, evolutionChain);
+        getEvolutions(data.chain, evolutionLevel,0);
 
-        console.log(evolutionChain);
+        console.log(evolutionLevel);
 
-        pokemonEvolutinoImage(evolutionChain);
+        pokemonEvolutinoImage(evolutionLevel);
     } catch (error) {
         console.error('Error fetching evolution chain:', error);
     }
 }
 
-async function pokemonEvolutinoImage(names){
+async function pokemonEvolutinoImage(levels){
     try{
-        const evolutionChainContainer = document.getElementById("evolution-chain");
-        evolutionChainContainer.innerHTML='';
-        for(let name of names){
-            const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
-            const responce = await fetch (url); 
-            const data = await responce.json(); 
-            
-            
-            const divElement = document.createElement('div');
-            divElement.classList.add('evolution');
-            divElement.innerHTML= `
-            <img src=${data.sprites.other['official-artwork'].front_default} alt=${data.name} image>
-            <p>${data.name}</p>`
-            evolutionChainContainer.appendChild(divElement);
-            if(name !== names[names.length-1]){
-                const arrow = document.createElement('span');
-                arrow.classList.add('arrow');
-                arrow.innerHTML = '➜';
-                evolutionChainContainer.appendChild(arrow);
-            }
+        const evolutionChainContainer =
+        document.getElementById("evolution-chain");
 
+        evolutionChainContainer.innerHTML = '';
+
+        for (let level of levels) {
+
+            const row = document.createElement('div');
+            row.classList.add('evolution-row');
+
+            evolutionChainContainer.appendChild(row);
+            console.log(level);
+            for (let name of level) {
+
+                const url =
+                    `https://pokeapi.co/api/v2/pokemon/${name}`;
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                const divElement =
+                    document.createElement('div');
+
+                divElement.classList.add('evolution');
+
+                divElement.innerHTML = `
+                    <img
+                        src="${data.sprites.other['official-artwork'].front_default}"
+                        alt="${data.name}"
+                    >
+                    <p>${data.name}</p>
+                `;
+                console.log(name);
+                console.log(level[level.length-1]);
+                if(name !== level[level.length-1]){
+                    const arrow = document.createElement('span');
+                    arrow.classList.add('arrow');
+                    arrow.innerHTML = '➜';
+                    evolutionChainContainer.appendChild(arrow);
+                }
+
+                row.appendChild(divElement);
+            }
         }
     }
     catch(error){
