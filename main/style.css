@@ -1,0 +1,149 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.55)
+    ),
+    url("pokemon-bg.jpeg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment: fixed\;
+}
+
+/* NAVBAR */
+
+.navbar{
+    width:92%;
+    height:62px;
+
+    position:fixed;
+    top:10px;
+    left:50%;
+    transform:translateX(-50%);
+
+    z-index:1000;
+
+    background:#d9d7cf;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 40px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:42px;
+}
+
+.logo h2{
+    font-size:20px;
+    font-weight:700;
+}
+
+.nav-links{
+    list-style:none;
+
+    display:flex;
+    gap:40px;
+}
+
+.nav-links li{
+    color:#575465;
+    font-size:15px;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+/* HERO */
+
+.hero{
+    height:calc(100vh - 100px);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+/* Pokemon Logo */
+
+.pokemon-logo{
+    width:500px;
+    max-width:90%;
+}
+
+/* Description */
+
+.description{
+    color:white;
+
+    max-width:900px;
+
+    font-size:24px;
+    line-height:1.35;
+
+    margin-top:10px;
+}
+
+/* Search */
+
+.search-box{
+    width:560px;
+    max-width:90%;
+
+    margin-top:70px;
+
+    background:#d9d4dd;
+
+    border-radius:50px;
+
+    display:flex;
+    align-items:center;
+
+    padding:18px 24px;
+
+    gap:18px;
+}
+
+.search-box i{
+    font-size:22px;
+    color:#555;
+}
+
+.search-box input{
+    flex:1;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:18px;
+}
+
+.search-box input::placeholder{
+    color:#666;
+}

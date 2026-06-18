@@ -21,6 +21,20 @@ body{
     color:white;
 }
 
+/* Search box */
+
+#searchContainer{
+    margin-bottom: 3em;
+    
+}
+#searchInput{
+    padding: 0.5em;
+    border-radius: 1em;
+}
+#searchButton{
+    padding: 0.5em;
+    border-radius: 1em;
+}
 .container{
     width:90%;
     max-width:1400px;
@@ -244,4 +258,22 @@ body{
         flex-direction:column;
     }
 
+}
+
+.search-box{
+    width:560px;
+    max-width:90%;
+
+    margin-top:70px;
+
+    background:#d9d4dd;
+
+    border-radius:50px;
+
+    display:flex;
+    align-items:center;
+
+    padding:18px 24px;
+
+    gap:18px;
 }

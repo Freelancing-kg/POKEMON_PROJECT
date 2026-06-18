@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokebala</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                <img src="pokeball.webp" alt="">
+                <h2>Pokebala</h2>
+            </div>
+
+            <ul class="nav-links">
+                <li><i class="fa-regular fa-circle-star"></i> Type</li>
+                <li><i class="fa-regular fa-circle-star"></i> Pokeballs</li>
+                <li><i class="fa-regular fa-circle-star"></i> Items</li>
+                <li><i class="fa-regular fa-circle-star"></i> Games</li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <div class="hero">
+
+            <img src="pokemon-logo.png"
+                alt="Pokemon Logo"
+                class="pokemon-logo">
+
+            <p class="description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Egestas neque cras dignissim in sem tellus. Viverra nibh sed
+                molestie consectetur placerat maecenas augue.
+                Ut sodales facilisi elementum lacus enim eget.
+            </p>
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-bars"></i>
+
+                <input
+                    type="text"
+                    id = "searchInput"
+                    placeholder="Hinted search text"
+                    onkeydown="if(event.key === 'Enter') searchPokemon()">
+                    
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+        </div>
+        
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

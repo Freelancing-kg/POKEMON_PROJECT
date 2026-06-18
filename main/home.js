@@ -1,10 +1,24 @@
-let currentName='';
+document
+.getElementById("searchInput")
+.addEventListener("keydown", (event) => {
 
+    if(event.key === "Enter"){
+        fetchPokemon();
+    }
+
+});
+
+const params = new URLSearchParams(window.location.search);
+
+const pokemonName = params.get("pokemon");
+
+if (pokemonName) {
+    fetchPokemon(pokemonName);
+}
 
 async function fetchPokemon(name) {
     try {
         const pokemonInput =name ||document.getElementById("searchInput").value.toLowerCase();
-        currentName = pokemonInput;
         const url = `https://pokeapi.co/api/v2/pokemon/${pokemonInput}`;
         const responce = await fetch(url);
         const data = await responce.json();
@@ -12,6 +26,7 @@ async function fetchPokemon(name) {
         
     } 
     catch (error) {
+        alert("Pokemon not Found");
         console.error('Error fetching Pokémon:', error);
     }   
 }
@@ -51,9 +66,7 @@ function displayPokemon(data){
         moveElement.textContent = moveInfo.move.name;
         movesContainer.appendChild(moveElement);
     });
-    speciesFetch(data.species.url);
-
-    
+    speciesFetch(data.species.url);    
 }
 
 async function speciesFetch(url){
@@ -74,7 +87,6 @@ function getEvolutions(chain, evolutionLevels,level=0){
     //     getEvolutions(nextEvolution, evolutionChain);
     
     // });
-    console.log("hello");
     if(!evolutionLevels[level]){
         evolutionLevels[level] = [];
         
@@ -118,6 +130,7 @@ async function pokemonEvolutinoImage(levels){
         document.getElementById("evolution-chain");
 
         evolutionChainContainer.innerHTML = '';
+        let i=1;
 
         for (let level of levels) {
 
@@ -125,7 +138,6 @@ async function pokemonEvolutinoImage(levels){
             row.classList.add('evolution-row');
 
             evolutionChainContainer.appendChild(row);
-            console.log(level);
             for (let name of level) {
 
                 const url =
@@ -146,17 +158,22 @@ async function pokemonEvolutinoImage(levels){
                     >
                     <p>${data.name}</p>
                 `;
-                console.log(name);
-                console.log(level[level.length-1]);
-                if(name !== level[level.length-1]){
+                if(i<=levels.length-1){
+                    console.log(`hello ${i}`);
                     const arrow = document.createElement('span');
                     arrow.classList.add('arrow');
                     arrow.innerHTML = '➜';
                     evolutionChainContainer.appendChild(arrow);
                 }
+                if(i==2 && levels.length === 3){
+                    console.log("hello world");
+                    i++;
+                }
+                console.log(i);
 
                 row.appendChild(divElement);
             }
+            i++;
         }
     }
     catch(error){
