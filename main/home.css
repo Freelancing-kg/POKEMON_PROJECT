@@ -13,7 +13,7 @@ body{
         rgba(0,0,0,.7),
         rgba(0,0,0,.7)
     ),
-    url("pokemon-bg.jpg");
+    url("D:/Freelancing/projects/POKEMON_PROJECT/main/pokemon-bg.jpeg");
 
     background-size:cover;
     background-position:center;
@@ -245,6 +245,43 @@ body{
     font-size:30px;
     align-self:center;
 }
+
+/* Move pop up */
+
+.modal{
+    display:none;
+
+    position:fixed;
+    inset:0;
+
+    background:
+    rgba(0,0,0,.7);
+
+    z-index:9999;
+}
+
+.modal-content{
+
+    width:500px;
+    max-width:90%;
+
+    margin:100px auto;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:#444;
+
+    color:white;
+}
+
+#closeModal{
+    float:right;
+    cursor:pointer;
+    font-size:28px;
+}
+
 
 /* RESPONSIVE */
 

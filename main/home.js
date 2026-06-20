@@ -8,6 +8,7 @@ document
 
 });
 
+const moveName = document.getElementById
 const params = new URLSearchParams(window.location.search);
 
 const pokemonName = params.get("pokemon");
@@ -65,6 +66,14 @@ function displayPokemon(data){
         moveElement.classList.add('move-card');
         moveElement.textContent = moveInfo.move.name;
         movesContainer.appendChild(moveElement);
+        moveElement.dataset.url = moveInfo.move.url;
+
+        moveElement.addEventListener(
+            "click",
+            () => showMoveDetails(
+                moveInfo.move.url
+            )
+        );
     });
     speciesFetch(data.species.url);    
 }
@@ -116,8 +125,6 @@ async function fetchEvolutionChain(url) {
 
         getEvolutions(data.chain, evolutionLevel,0);
 
-        console.log(evolutionLevel);
-
         pokemonEvolutinoImage(evolutionLevel);
     } catch (error) {
         console.error('Error fetching evolution chain:', error);
@@ -159,7 +166,6 @@ async function pokemonEvolutinoImage(levels){
                     <p>${data.name}</p>
                 `;
                 if(i<=levels.length-1){
-                    console.log(`hello ${i}`);
                     const arrow = document.createElement('span');
                     arrow.classList.add('arrow');
                     arrow.innerHTML = '➜';
@@ -169,7 +175,6 @@ async function pokemonEvolutinoImage(levels){
                     console.log("hello world");
                     i++;
                 }
-                console.log(i);
 
                 row.appendChild(divElement);
             }
@@ -180,3 +185,63 @@ async function pokemonEvolutinoImage(levels){
         console.log(error);
     }
 }
+
+async function showMoveDetails(url){
+
+    try{
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        document.getElementById("moveName").textContent = data.name;
+
+        document.getElementById("moveType").textContent = data.type.name;
+
+        document .getElementById("movePower").textContent = data.power ?? "-";
+
+        document.getElementById("moveAccuracy").textContent = data.accuracy ?? "-";
+
+        document.getElementById("movePP").textContent = data.pp;
+
+        document.getElementById("moveClass").textContent = data.damage_class.name;
+
+        document.getElementById("moveEffect").textContent = 
+        data.effect_entries.find(
+                entry =>
+                entry.language.name === "en"
+            )?.effect || "No effect data";
+
+        document.getElementById("moveModal").style.display = "block";
+
+    }
+    catch(error){
+
+        console.log(error);
+
+    }
+}
+
+document
+.getElementById("closeModal")
+.addEventListener("click", () => {
+
+    document
+        .getElementById("moveModal")
+        .style.display = "none";
+
+});
+window.addEventListener("click", e => {
+
+    const modal =
+        document.getElementById(
+            "moveModal"
+        );
+
+    if(e.target === modal){
+
+        modal.style.display =
+            "none";
+    }
+
+});
