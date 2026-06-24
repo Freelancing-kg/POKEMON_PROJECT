@@ -24,7 +24,6 @@ async function fetchPokemon(name) {
         const responce = await fetch(url);
         const data = await responce.json();
         displayPokemon(data);
-        
     } 
     catch (error) {
         alert("Pokemon not Found");
@@ -85,7 +84,7 @@ async function speciesFetch(url){
         await fetchEvolutionChain(data.evolution_chain.url);
     }
     catch(error){
-        console.log(error);
+        console.error(error);
     }   
 }
 
@@ -165,6 +164,9 @@ async function pokemonEvolutinoImage(levels){
                     >
                     <p>${data.name}</p>
                 `;
+                divElement.addEventListener('click', () => {
+                    fetchPokemon(data.name);
+                });
                 if(i<=levels.length-1){
                     const arrow = document.createElement('span');
                     arrow.classList.add('arrow');
@@ -172,7 +174,6 @@ async function pokemonEvolutinoImage(levels){
                     evolutionChainContainer.appendChild(arrow);
                 }
                 if(i==2 && levels.length === 3){
-                    console.log("hello world");
                     i++;
                 }
 
@@ -182,7 +183,7 @@ async function pokemonEvolutinoImage(levels){
         }
     }
     catch(error){
-        console.log(error);
+        console.error(error);
     }
 }
 
@@ -217,7 +218,7 @@ async function showMoveDetails(url){
     }
     catch(error){
 
-        console.log(error);
+        console.error(error);
 
     }
 }
@@ -245,3 +246,23 @@ window.addEventListener("click", e => {
     }
 
 });
+
+const movesDropDown = document.getElementById("movesDropDown");
+
+const movesBtn = document.getElementById("dropDownBtn")
+
+movesBtn.addEventListener("click", () => {
+    if(
+        movesDropDown.style.display === "grid"
+    ){
+
+        movesDropDown.style.display = "none";
+        movesBtn.innerText = "▼ Moves"
+
+    }else{
+
+        movesDropDown.style.display = "grid";
+        movesBtn.innerText = "▲ Moves"
+    }
+});
+
