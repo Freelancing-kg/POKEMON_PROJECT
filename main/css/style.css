@@ -13,7 +13,7 @@ body{
         rgba(0,0,0,0.55),
         rgba(0,0,0,0.55)
     ),
-    url("D:/Freelancing/projects/POKEMON_PROJECT/main/images/pokemon-bg.jpeg");
+    url("/images/pokemon-bg.jpeg");
 
     background-size:cover;
     background-position:center;

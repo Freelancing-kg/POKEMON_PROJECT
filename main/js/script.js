@@ -10,7 +10,7 @@ function searchPokemon() {
     if (!pokemonName) return;
 
     window.location.href =
-        `home.html?pokemon=${pokemonName}`;
+        `home?pokemon=${pokemonName}`;
 }
 
 // async function fetchPokemon(pokemonName = null) {
