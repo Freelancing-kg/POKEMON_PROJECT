@@ -48,21 +48,37 @@
 
             <div class="search-box">
 
-                <i class="fa-solid fa-bars"></i>
 
                 <input
                     type="text"
                     id = "searchInput"
-                    placeholder="Hinted search text"
+                    placeholder="Enter Name or Number"
                     onkeydown="if(event.key === 'Enter') searchPokemon()">
                     
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-magnifying-glass" onclick="searchPokemon()"></i>
 
             </div>
 
         </div>
         
     </main>
+    <footer>
+        <p><strong>PokéBala</strong> — A student learning project created for educational purposes.</p>
+
+        <p>
+            Pokémon and all related names, characters, images, trademarks, and game content are © Nintendo, Game Freak, and Creatures Inc.
+        </p>
+
+        <p>
+            Pokémon data is provided by the free <a href="https://pokeapi.co/" target="_blank">PokéAPI</a>.
+        </p>
+
+        <p>
+            This website is not affiliated with, endorsed, sponsored, or specifically approved by Nintendo, Game Freak, Creatures Inc., or The Pokémon Company.
+        </p>
+
+        <p>© 2026 PokéBala. Student Project.</p>
+    </footer>
     <script src="/js/script.js"></script>
 </body>
 </html>

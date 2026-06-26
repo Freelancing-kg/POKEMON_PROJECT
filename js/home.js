@@ -18,15 +18,17 @@ if (pokemonName) {
 }
 
 async function fetchPokemon(name) {
+    const container = document.getElementById("container");
     try {
         const pokemonInput =name ||document.getElementById("searchInput").value.toLowerCase();
         const url = `https://pokeapi.co/api/v2/pokemon/${pokemonInput}`;
         const responce = await fetch(url);
         const data = await responce.json();
         displayPokemon(data);
+        container.style.display = "block"
     } 
     catch (error) {
-        alert("Pokemon not Found");
+        window.location.href = `error`;
         console.error('Error fetching Pokémon:', error);
     }   
 }

@@ -51,6 +51,7 @@ body{
 
 .logo img{
     width:42px;
+    border-radius: 100%;
 }
 
 .logo h2{
@@ -146,4 +147,25 @@ body{
 
 .search-box input::placeholder{
     color:#666;
+}
+
+/* Footer */
+
+footer{
+    margin-top:60px;
+    padding:25px;
+    text-align:center;
+    background:#222;
+    color:white;
+    line-height:1.8;
+    font-size:14px;
+}
+
+footer a{
+    color:#ffcb05;
+    text-decoration:none;
+}
+
+footer a:hover{
+    text-decoration:underline;
 }
